@@ -1,9 +1,20 @@
 #container {
 	width: 100%;
+	display: inline-block;
 }
+
 .block {
 	width: 10px;
 	height: 10px;
-	display: inline-block;
 	margin: 0;
+}
+
+.block-x {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+.block-y {
+	display: block;
+	margin-right: 10px;
 }

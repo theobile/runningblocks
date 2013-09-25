@@ -4,19 +4,73 @@
 	<title></title>
 	
 	<link rel="stylesheet" type="text/css" href="css/blocks.css">
-	<style type="text/css"></style>
+	<style type="text/css">
+		#controls {
+			position: fixed;
+			left: 30px;
+			top: 50px;
+		}
+	</style>
+
 
 </head>
 <body>
-	<div id="container"></div>
+	<div id="container" class="con"></div>
+
+	<div id="controls">
+		<button id="start-stop">Start/Stop</button>
+		<span>Rate: </span>
+		<input value="60" id="rate" >
+			<button id="rate-go">
+				GO
+			</button>
+		</input>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button onclick="blocks.reverse()">Reverse Direction</button>
+		<button id="orientation">Switch Orientation</button>
+		<button id="greyscale">Toggle Greyscale</button>
+		<button id="mouse-hover">Toggle Mouse Hover</button>
+
+	</div>
+
+
 	<script type="text/javascript" src="libs/jquery.js"></script>
 	<script type="text/javascript" src="js/blocks.js"></script>
 	<script type="text/javascript">
 
 		var blocks = new Blocks({
-			runRate: 120, //Milliseconds
+			runRate: 60, 					// Milliseconds #Defaults to 200 ms
+			container: 'container',			// Parent container ID of blocks
+			orientation: 'horizontal', 		// Left-Right or Top-Down #Defaults to horizontal
+			greyscale: false, 				// Colourful or greyscaled blocks #Defaualts to false
+			hoverable:  true				// Enables hover effect #Defaults to true
 		});
 		blocks.init();
+
+		$('#start-stop').click(function(){
+			if (blocks.isRunning())
+				blocks.stop();
+			else
+				blocks.start();
+		});
+
+		$('#rate-go').click(function(){
+			var rate = $('#rate').val();
+			console.log(rate);
+			blocks.changeRate(rate);
+		});
+
+		$('#orientation').click(function(){
+			blocks.switchOrientation();
+		});
+
+		$('#greyscale').click(function(){
+			blocks.toggleGreyscale();
+		});
+
+		$('#mouse-hover').click(function(){
+			blocks.toggleMousehover();
+		});
 
 	</script>
 </body>
